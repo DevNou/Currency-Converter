@@ -5,34 +5,107 @@
 }
 
 :root {
-  --bg-gradient: linear-gradient(135deg, #0f172a, #1e293b);
-  --card-bg: #1e293b;
-  --input-bg: #334155;
-  --text-primary: #e2e8f0;
-  --text-secondary: #94a3b8;
+  --bg-primary-light: #f0f2f5;
+  --bg-secondary-light: #ffffff;
+  --input-bg-light: #e0e0e0;
+  --text-primary-light: #111827;
+  --text-secondary-light: #374151;
   --accent-primary: #3b82f6;
   --accent-hover: #2563eb;
-  --border-color: #475569;
+  --border-color-light: #d1d5db;
+
+  --bg-primary-dark: #0f172a;
+  --bg-secondary-dark: #1e293b;
+  --input-bg-dark: #334155;
+  --text-primary-dark: #e2e8f0;
+  --text-secondary-dark: #94a3b8;
+  --border-color-dark: #475569;
+}
+
+body.light-mode {
+  --bg-primary: var(--bg-primary-light);
+  --bg-secondary: var(--bg-secondary-light);
+  --input-bg: var(--input-bg-light);
+  --text-primary: var(--text-primary-light);
+  --text-secondary: var(--text-secondary-light);
+  --border-color: var(--border-color-light);
+}
+
+body.dark-mode {
+  --bg-primary: var(--bg-primary-dark);
+  --bg-secondary: var(--bg-secondary-dark);
+  --input-bg: var(--input-bg-dark);
+  --text-primary: var(--text-primary-dark);
+  --text-secondary: var(--text-secondary-dark);
+  --border-color: var(--border-color-dark);
 }
 
 body {
   font-family: 'Poppins', sans-serif;
-  background: var(--bg-gradient);
+  background: var(--bg-primary);
   display: flex;
   justify-content: center;
   align-items: center;
   min-height: 100vh;
   padding: 20px;
+  transition: all 0.3s ease;
 }
 
 .container {
   width: 100%;
   max-width: 450px;
-  background-color: var(--card-bg);
+  background-color: var(--bg-secondary);
   padding: 35px 30px;
   border-radius: 15px;
   box-shadow: 0 8px 30px rgba(0,0,0,0.4);
   text-align: center;
+}
+
+.mode-toggle {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 50px;
+  height: 28px;
+  margin-right: 10px;
+}
+
+.switch input {
+  display: none;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0; left: 0;
+  right: 0; bottom: 0;
+  background-color: #ccc;
+  border-radius: 28px;
+  transition: 0.4s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 20px; width: 20px;
+  left: 4px; bottom: 4px;
+  background-color: white;
+  border-radius: 50%;
+  transition: 0.4s;
+}
+
+input:checked + .slider {
+  background-color: var(--accent-primary);
+}
+
+input:checked + .slider:before {
+  transform: translateX(22px);
 }
 
 h1 {
@@ -50,6 +123,7 @@ h1 {
 .form-group {
   margin-bottom: 20px;
   text-align: left;
+  position: relative;
 }
 
 label {
@@ -59,7 +133,28 @@ label {
   font-weight: 500;
 }
 
-input, select {
+#amount {
+  width: 100%;
+  font-size: 1.3rem; /* μεγαλύτερο */
+  padding: 16px;
+  border-radius: 8px;
+  border: 1px solid var(--border-color);
+  background-color: var(--input-bg);
+  color: var(--text-primary);
+}
+
+.search-input {
+  width: 100%;
+  padding: 10px 12px;
+  border-radius: 8px;
+  border: 1px solid var(--border-color);
+  background-color: var(--input-bg);
+  color: var(--text-primary);
+  font-size: 0.95rem;
+  margin-bottom: 5px;
+}
+
+.currency-select {
   width: 100%;
   padding: 12px;
   border-radius: 8px;
@@ -67,7 +162,6 @@ input, select {
   background-color: var(--input-bg);
   color: var(--text-primary);
   font-size: 1rem;
-  transition: all 0.3s ease;
 }
 
 input:focus, select:focus {
@@ -94,6 +188,13 @@ button:hover {
   transform: translateY(-2px);
 }
 
+.powered-by {
+  text-align: center;
+  margin-top: 12px;
+  color: var(--text-secondary);
+  font-size: 0.85rem;
+}
+
 #result {
   margin-top: 25px;
   font-size: 1.2rem;
@@ -117,5 +218,15 @@ button:hover {
 
   h1 {
     font-size: 1.6rem;
+  }
+
+  .search-input {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+  }
+
+  .currency-select {
+    font-size: 0.95rem;
   }
 }

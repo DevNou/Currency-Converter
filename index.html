@@ -7,8 +7,16 @@
   <link rel="stylesheet" href="style.css" />
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
 </head>
-<body>
+<body class="light-mode">
   <div class="container">
+    <div class="mode-toggle">
+      <label class="switch">
+        <input type="checkbox" id="mode-switch">
+        <span class="slider"></span>
+      </label>
+      <span id="mode-label">Light Mode</span>
+    </div>
+
     <h1>💱 Currency Converter</h1>
     <p class="subtitle">Convert currencies quickly and easily</p>
 
@@ -20,19 +28,18 @@
 
       <div class="form-group">
         <label for="from-currency">From</label>
-        <select id="from-currency">
-          <option value="">Loading currencies...</option>
-        </select>
+        <input type="text" id="from-search" placeholder="Search currency..." class="search-input" />
+        <select id="from-currency" class="currency-select"></select>
       </div>
 
       <div class="form-group">
         <label for="to-currency">To</label>
-        <select id="to-currency">
-          <option value="">Loading currencies...</option>
-        </select>
+        <input type="text" id="to-search" placeholder="Search currency..." class="search-input" />
+        <select id="to-currency" class="currency-select"></select>
       </div>
 
       <button type="submit">Convert</button>
+      <p class="powered-by">Powered by DEVAR</p>
     </form>
 
     <div id="loader" class="hidden">⏳ Converting...</div>
